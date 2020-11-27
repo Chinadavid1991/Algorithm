@@ -10,9 +10,9 @@
 template<typename T, std::size_t N>
 class SelectSort {
     using v_ref = T (&)[N];
+    using v_ptr = T (*)[N];
 public:
     explicit SelectSort(v_ref data) : _data(data) {}
-
     void sort() {
         for (int ix = 0; ix < N; ++ix) {
             swap(_data[argMin(ix,N)], _data[ix]);
