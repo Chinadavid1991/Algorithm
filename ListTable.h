@@ -20,11 +20,7 @@ class ListTable {
     };
     using v_ptr = Node*;
 public:
-    explicit ListTable(int capacity) : _capacity(capacity), _data(new v_ptr[_capacity]) {
-        for(int ix = 0;ix < _capacity;++ix){
-            _data[ix] = nullptr;
-        }
-    }
+    explicit ListTable(int capacity) : _capacity(capacity), _data(new v_ptr[_capacity]) {}
 
     void add(int id,const std::string& name){
         int ix = id % _capacity;
