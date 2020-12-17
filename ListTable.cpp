@@ -5,8 +5,8 @@
 #include "ListTable.h"
 using namespace std;
 void testListTable(){
-    ListTable table(128);
-    for(int ix = 0;ix < 10000;ix++){
+    ListTable table(1024);
+    for(int ix = 0;ix < 100000;ix++){
         table.add(ix,std::to_string(ix));
     }
     cout << table.get(100) << endl;

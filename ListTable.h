@@ -14,8 +14,8 @@ class ListTable {
         int id;
         Node(Node *next, std::string name,int id) : next(next), name(std::move(name)),id(id) {}
         Node():next(nullptr),id(-1){}
-        bool isEqual(int id_,const std::string& name_){
-            return id == id_ && name == name_;
+        bool isEqual(int id_){
+            return id == id_;
         }
     };
     using v_ptr = Node*;
@@ -34,7 +34,8 @@ public:
         }
         else{
             while (cur){
-                if(cur->isEqual(id,name)){
+                if(cur->isEqual(id)){
+                    cur->name = name;
                     return;
                 }
                 if(nullptr == cur->next){
@@ -55,7 +56,7 @@ public:
         else{
             v_ptr last = nullptr;
             while (cur){
-                if(cur->isEqual(id,name)){
+                if(cur->isEqual(id)){
                     if(last){
                         last->next = cur->next;
                         delete cur;
@@ -73,7 +74,7 @@ public:
         int ix = id % _capacity;
         v_ptr cur = _data[ix];
         while (cur){
-            if(cur->id == id){
+            if(cur->isEqual(id)){
                 return cur->name;
             }
             cur = cur->next;
