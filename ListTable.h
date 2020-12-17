@@ -6,6 +6,7 @@
 #define ALGORITHM___LISTTABLE_H
 #include <string>
 #include <utility>
+#include <iostream>
 class ListTable {
     struct Node{
         Node* next;
@@ -99,6 +100,6 @@ private:
 
 
 };
-
+void testListTable();
 
 #endif //ALGORITHM___LISTTABLE_H
