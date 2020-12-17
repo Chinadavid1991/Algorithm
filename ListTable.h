@@ -44,8 +44,7 @@ public:
         ++_size;
     }
     void remove(int id){
-        int ix = id % _capacity;
-        v_ptr cur = _data[ix];
+        v_ptr cur = _data[id % _capacity];
         if(nullptr == cur){
             return;
         }
@@ -67,8 +66,7 @@ public:
     }
 
     std::string get(int id){
-        int ix = id % _capacity;
-        v_ptr cur = _data[ix];
+        v_ptr cur = _data[id % _capacity];
         while (cur){
             if(cur->isEqual(id)){
                 return cur->name;
