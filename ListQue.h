@@ -78,6 +78,6 @@ private:
     v_ptr _rear;
     std::size_t _size;
 };
-
+void testListQue();
 
 #endif //ALGORITHM___LISTQUE_H
