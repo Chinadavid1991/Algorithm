@@ -51,6 +51,6 @@ private:
     v_ptr _data;
     int _top;
 };
-
+void testArrayStack();
 
 #endif //ALGORITHM___ARRAYSTACK_H
