@@ -65,7 +65,6 @@ public:
 
         return os;
     }
-
     virtual ~ListQue() {
         v_ptr cur = _front;
         while (cur){
@@ -74,7 +73,6 @@ public:
             cur = next;
         }
     }
-
 private:
     v_ptr _front;
     v_ptr _rear;
