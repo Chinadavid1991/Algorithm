@@ -47,7 +47,7 @@ public:
         }
         ++_size;
     }
-    void remove(int id,const std::string& name){
+    void remove(int id){
         int ix = id % _capacity;
         v_ptr cur = _data[ix];
         if(nullptr == cur){
