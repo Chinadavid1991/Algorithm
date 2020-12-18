@@ -10,7 +10,7 @@ template <typename T>
 class HeapSort {
     ArrayHeap<T> _heap;
 public:
-    HeapSort()= default;
+    HeapSort(T* items,size_t length):_heap(items,length+1){};
 };
 
 

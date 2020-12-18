@@ -13,7 +13,7 @@ class ArrayHeap {
 public:
     explicit ArrayHeap(const size_t capacity) :
                        _capacity(capacity),_store(true),_items(new T[capacity + 1]) {}
-    ArrayHeap(T* items, const size_t capacity,bool store = false):
+    ArrayHeap(T* items, const size_t capacity,const bool store = false):
               _capacity(capacity), _store(store),_items(items) {}
     //堆中现有元素个数
     size_t size() const { return N; }
@@ -61,7 +61,9 @@ public:
     }
 
     ~ArrayHeap() {
-        delete[] _items;
+        if(_store){
+            delete[] _items;
+        }
     }
 
 private:
