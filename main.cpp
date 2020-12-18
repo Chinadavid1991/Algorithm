@@ -1,7 +1,8 @@
 #include <iostream>
-#include "ListTable.h"
+#include <string>
+#include "BinaryTree.h"
 using namespace std;
 int main() {
-    testListTable();
+    testBinaryTree();
     return 0;
 }
