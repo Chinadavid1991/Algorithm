@@ -24,13 +24,13 @@ public:
     }
 
 private:
-    size_t argMin(size_t start,size_t end) {
-        for (size_t ix = start; ix < end; ++ix) {
-            if (_data[start] > _data[ix]) {
-                start = ix;
+    size_t argMin(size_t _items,size_t end) {
+        for (size_t ix = _items; ix < end; ++ix) {
+            if (_data[_items] > _data[ix]) {
+                _items = ix;
             }
         }
-        return start;
+        return _items;
     }
 
     void swap(T &x, T &y) {
