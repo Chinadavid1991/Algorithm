@@ -11,10 +11,10 @@
 template<class T>
 class ArrayHeap {
 public:
-    explicit ArrayHeap(const size_t capacity) :
+    explicit ArrayHeap(const int capacity) :
             _capacity(capacity), _store(true), _items(new T[capacity]) {}
 
-    ArrayHeap(T *items, const size_t length ,const size_t capacity, const bool store = false) :
+    ArrayHeap(T *items, const int length ,const int capacity, const bool store = false) :
             N(length),_capacity(capacity), _store(store), _items(items) {}
 
     //堆中现有元素个数
@@ -46,14 +46,14 @@ public:
         return maxElem;
     }
 
-    T &at(size_t ix) const { return _items[ix]; }
+    T &at(int ix) const { return _items[ix]; }
 
-    T &operator[](size_t ix) {
+    T &operator[](int ix) {
         return _items[ix];
     }
 
     //上浮操作：元素k处的元素上浮至堆正确的位置
-    void swim(size_t k) {
+    void swim(int k) {
         k = k + 1;//坐标向右平移1
         while (k >= 2 && _items[k - 1] > _items[k / 2 - 1]) {
             exchange(k - 1, k / 2 - 1);
@@ -62,12 +62,12 @@ public:
     }
 
     //下沉操作：元素k处的元素下沉至堆正确的位置
-    void sink(size_t k) {
+    void sink(int k) {
         k = k + 1;
         while (k * 2 <= N)//k*2-1 <= N-1
         {
             //查找当前节点的左右子节点最大的元素索引
-            size_t ix = 2 * k <= N - 1 && _items[2 * k] > _items[2 * k - 1] ? 2 * k : 2 * k - 1;
+            int ix = 2 * k <= N - 1 && _items[2 * k] > _items[2 * k - 1] ? 2 * k : 2 * k - 1;
             //比较元素ix和当前元素
             if (_items[k - 1] > _items[ix]) {
                 break;
@@ -78,12 +78,12 @@ public:
     }
 
     //下沉操作：元素k处的元素下沉至堆正确的位置,范围在[0,range]
-    void sink(size_t k, size_t range) {
+    void sink(int k, int range) {
         k = k + 1;
         while (k * 2 - 1 <= range)//k*2-1 <= N-1
         {
             //查找当前节点的左右子节点最大的元素索引
-            size_t ix = 2 * k <= range && _items[2 * k] > _items[2 * k - 1] ? 2 * k : 2 * k - 1;
+            int ix = 2 * k <= range && _items[2 * k] > _items[2 * k - 1] ? 2 * k : 2 * k - 1;
             //比较元素ix和当前元素
             if (_items[k - 1] > _items[ix]) {
                 break;

@@ -2,9 +2,12 @@
 #include "HeapSort.h"
 using namespace std;
 int main() {
-    int arr[11] = {0,1,2,3,4,5,6,7,8,9};
-    HeapSort<int> sort(arr,10,10);
-    sort.creatHeap();
+    int arr[101] = {0};
+    for(int ix = 0;ix <= 20;++ix){
+        arr[ix] = ix;
+    }
+    HeapSort<int> sort(arr,21,1000);
+    sort.sort();
     sort.print();
     return 0;
 }
