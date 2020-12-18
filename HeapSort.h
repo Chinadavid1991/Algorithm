@@ -32,6 +32,6 @@ private:
         }
     }
 };
-
+void testHeapSort();
 
 #endif //ALGORITHM___HEAPSORT_H
