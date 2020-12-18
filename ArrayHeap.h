@@ -11,8 +11,10 @@
 template<class T>
 class ArrayHeap {
 public:
-    explicit ArrayHeap(const size_t capacity) : _items(new T[capacity + 1]) {}
-
+    explicit ArrayHeap(const size_t capacity) :
+                       _capacity(capacity),_store(true),_items(new T[capacity + 1]) {}
+    ArrayHeap(T* items, const size_t capacity,bool store = false):
+              _capacity(capacity), _store(store),_items(items) {}
     //堆中现有元素个数
     size_t size() const { return N; }
 
@@ -39,6 +41,24 @@ public:
     }
 
     T& at(size_t ix) const { return _items[ix]; }
+    T& operator[] (size_t ix){
+        return _items[ix];
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const ArrayHeap &heap) {
+        os << "[";
+        for(size_t ix = 0;ix < heap.N; ++ix){
+            if(ix == heap.N -1){
+                os << heap.at(ix+1) << "]";
+            }
+            else
+            {
+                os << heap.at(ix+1) << ",";
+            }
+
+        }
+        return os;
+    }
 
     ~ArrayHeap() {
         delete[] _items;
@@ -77,9 +97,11 @@ private:
     }
 
 private:
+    const bool _store = false;
+    size_t _capacity;
     size_t N = 0;
     T *_items;
 };
-
+void testArrayHeap();
 
 #endif //ALGORITHM___ArrayHeap_H

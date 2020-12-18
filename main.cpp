@@ -1,8 +1,7 @@
 #include <iostream>
-#include <string>
-#include "BinaryTree.h"
+#include "HeapSort.h"
 using namespace std;
 int main() {
-    testBinaryTree();
+    HeapSort<int> sort;
     return 0;
 }
