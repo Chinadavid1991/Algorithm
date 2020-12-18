@@ -79,7 +79,18 @@ public:
     v_ptr parent(const K &key) const {
         return parent(_root, key);
     }
-
+    v_ptr min(){
+        if(_root){
+            return min(_root);
+        }
+        return nullptr;
+    }
+    v_ptr max(){
+        if(_root){
+            return max(_root);
+        }
+        return nullptr;
+    }
     v_ptr root() const { return _root; }
 
     size_t size() const { return N; }
@@ -276,6 +287,18 @@ private:
         else //子节点不存在
         {
             return nullptr;
+        }
+        return node;
+    }
+    v_ptr min(v_ptr node){
+        if(node->left){
+            node = min(node->left);
+        }
+        return node;
+    }
+    v_ptr max(v_ptr node){
+        if(node->right){
+            node = max(node->right);
         }
         return node;
     }

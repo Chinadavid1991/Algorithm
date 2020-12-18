@@ -13,4 +13,6 @@ void testBinaryTree(){
     tree.remove(120);
     cout << tree << endl;
     cout << tree.parent(140)->value << endl;
+    cout << tree.min()->value << endl;
+    cout << tree.max()->value << endl;
 }
