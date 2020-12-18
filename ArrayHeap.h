@@ -38,7 +38,7 @@ public:
         return maxElem;
     }
 
-    T &at(size_t ix) const { return start[ix]; }
+    T& at(size_t ix) const { return start[ix]; }
 
     ~ArrayHeap() {
         delete[] start;
