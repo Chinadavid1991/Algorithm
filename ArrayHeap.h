@@ -63,33 +63,31 @@ public:
 
     //下沉操作：元素k处的元素下沉至堆正确的位置
     void sink(int k) {
-        k = k + 1;
-        while (k * 2 <= N)//k*2-1 <= N-1
-        {
-            //查找当前节点的左右子节点最大的元素索引
-            int ix = 2 * k <= N - 1 && _items[2 * k] > _items[2 * k - 1] ? 2 * k : 2 * k - 1;
+        for(int ix = 2*k+1;ix < N;ix = 2*k+1){
+            if(k+1 < N && _items[k+1] > _items[k]){
+                ix = k+1;
+            }
             //比较元素ix和当前元素
-            if (_items[k - 1] > _items[ix]) {
+            if (_items[k] > _items[ix]) {
                 break;
             }
-            exchange(k - 1, ix);
-            k = ix + 1;//向右平移1
+            exchange(k, ix);
+            k = ix;
         }
     }
 
     //下沉操作：元素k处的元素下沉至堆正确的位置,范围在[0,range]
     void sink(int k, int range) {
-        k = k + 1;
-        while (k * 2 - 1 <= range)//k*2-1 <= N-1
-        {
-            //查找当前节点的左右子节点最大的元素索引
-            int ix = 2 * k <= range && _items[2 * k] > _items[2 * k - 1] ? 2 * k : 2 * k - 1;
+        for(int ix = 2*k+1;ix <= range;ix = 2*k+1){
+            if(k+1 <= range && _items[k+1] > _items[k]){
+                ix = k+1;
+            }
             //比较元素ix和当前元素
-            if (_items[k - 1] > _items[ix]) {
+            if (_items[k] > _items[ix]) {
                 break;
             }
-            exchange(k - 1, ix);
-            k = ix + 1;//向右平移1
+            exchange(k, ix);
+            k = ix;
         }
     }
 
