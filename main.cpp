@@ -1,8 +1,7 @@
 #include <iostream>
-#include "MaxPriorityQue.h"
+#include "HeapSort.h"
 using namespace std;
 int main() {
-
-
+    testHeapSort();
     return 0;
 }
