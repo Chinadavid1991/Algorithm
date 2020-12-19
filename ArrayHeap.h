@@ -12,10 +12,10 @@ template<class T>
 class ArrayHeap {
 public:
     explicit ArrayHeap(const int capacity) :
-            _capacity(capacity), _store(true), _items(new T[capacity]) {}
+            _capacity(capacity), _items(new T[capacity]), _store(true) {}
 
     ArrayHeap(T *items, const int length, const int capacity, const bool store = false) :
-            N(length), _capacity(capacity), _store(store), _items(items) {}
+            N(length), _capacity(capacity), _items(items), _store(store) {}
 
     //堆中现有元素个数
     size_t size() const { return N; }
@@ -63,8 +63,8 @@ public:
     //下沉操作：元素k处的元素下沉至堆正确的位置
     void sink(int k) {
         for (int ix = 2 * k + 1; ix < N; ix = 2 * k + 1) {
-            if (k + 1 < N && _items[k + 1] > _items[k]) {
-                ix = k + 1;
+            if (ix + 1 < N && _items[ix + 1] > _items[ix]) {
+                ix = ix + 1;
             }
             //比较元素ix和当前元素
             if (_items[k] > _items[ix]) {
@@ -78,8 +78,8 @@ public:
     //下沉操作：元素k处的元素下沉至堆正确的位置,范围在[0,range]
     void sink(int k, int range) {
         for (int ix = 2 * k + 1; ix <= range; ix = 2 * k + 1) {
-            if (k + 1 <= range && _items[k + 1] > _items[k]) {
-                ix = k + 1;
+            if (ix + 1 <= range && _items[ix + 1] > _items[ix]) {
+                ix = ix + 1;
             }
             //比较元素ix和当前元素
             if (_items[k] > _items[ix]) {
