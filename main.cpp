@@ -2,6 +2,6 @@
 #include "HeapSort.h"
 using namespace std;
 int main() {
-    testHeapSort();
+    testArrayHeap();
     return 0;
 }

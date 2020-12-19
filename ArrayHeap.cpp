@@ -13,5 +13,5 @@ void testArrayHeap(){
     heap.delMax();
     cout << heap << endl;
     cout << heap.size() << endl;
-    cout << heap[19] << endl;
+    cout << heap[20] << endl;
 }
