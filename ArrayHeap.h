@@ -14,8 +14,8 @@ public:
     explicit ArrayHeap(const int capacity) :
             _capacity(capacity), _store(true), _items(new T[capacity]) {}
 
-    ArrayHeap(T *items, const int length ,const int capacity, const bool store = false) :
-            N(length),_capacity(capacity), _store(store), _items(items) {}
+    ArrayHeap(T *items, const int length, const int capacity, const bool store = false) :
+            N(length), _capacity(capacity), _store(store), _items(items) {}
 
     //堆中现有元素个数
     size_t size() const { return N; }
@@ -54,18 +54,17 @@ public:
 
     //上浮操作：元素k处的元素上浮至堆正确的位置
     void swim(int k) {
-        k = k + 1;//坐标向右平移1
-        while (k >= 2 && _items[k - 1] > _items[k / 2 - 1]) {
-            exchange(k - 1, k / 2 - 1);
-            k = k / 2;
+        while (k >= 1 && _items[k] > _items[(k + 1) / 2 - 1]) {
+            exchange(k, (k + 1) / 2 - 1);
+            k = (k + 1) / 2 - 1;
         }
     }
 
     //下沉操作：元素k处的元素下沉至堆正确的位置
     void sink(int k) {
-        for(int ix = 2*k+1;ix < N;ix = 2*k+1){
-            if(k+1 < N && _items[k+1] > _items[k]){
-                ix = k+1;
+        for (int ix = 2 * k + 1; ix < N; ix = 2 * k + 1) {
+            if (k + 1 < N && _items[k + 1] > _items[k]) {
+                ix = k + 1;
             }
             //比较元素ix和当前元素
             if (_items[k] > _items[ix]) {
@@ -78,9 +77,9 @@ public:
 
     //下沉操作：元素k处的元素下沉至堆正确的位置,范围在[0,range]
     void sink(int k, int range) {
-        for(int ix = 2*k+1;ix <= range;ix = 2*k+1){
-            if(k+1 <= range && _items[k+1] > _items[k]){
-                ix = k+1;
+        for (int ix = 2 * k + 1; ix <= range; ix = 2 * k + 1) {
+            if (k + 1 <= range && _items[k + 1] > _items[k]) {
+                ix = k + 1;
             }
             //比较元素ix和当前元素
             if (_items[k] > _items[ix]) {
