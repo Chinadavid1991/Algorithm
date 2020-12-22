@@ -1,7 +1,11 @@
 #include <iostream>
-#include "HeapSort.h"
+#include "RBTree.h"
 using namespace std;
 int main() {
-    testHeapSort();
+    RBTree<int,std::string> tree;
+    for(size_t ix = 0;ix < 100;++ix){
+        tree.insert(ix,std::to_string(ix));
+    }
+    cout << tree.isBalance() << endl;
     return 0;
 }
