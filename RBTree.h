@@ -168,6 +168,6 @@ private:
     Node *_root;
 
 };
-
+void testRBTree();
 
 #endif //ALGORITHM___RBTREE_H
