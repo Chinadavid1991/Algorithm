@@ -7,5 +7,6 @@ int main() {
         tree.insert(ix,std::to_string(ix));
     }
     cout << tree.isBalance() << endl;
+
     return 0;
 }
