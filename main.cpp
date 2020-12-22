@@ -1,7 +1,7 @@
 #include <iostream>
-#include "InsertSort.h"
+#include "ShellSort.h"
 using namespace std;
 int main() {
-    testInsertSort();
+    testShellSort();
     return 0;
 }
