@@ -1,8 +1,7 @@
 #include <iostream>
-#include "RBTree.h"
+#include "InsertSort.h"
 using namespace std;
 int main() {
-    testRBTree();
-
+    testInsertSort();
     return 0;
 }
