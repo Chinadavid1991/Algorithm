@@ -1,9 +1,9 @@
 #include <iostream>
-#include "MergeSort.h"
+#include "Graph.h"
 
 using namespace std;
 
 int main() {
-    testMergeSort();
+    testGraph();
     return 0;
 }

@@ -31,7 +31,8 @@ void testGraph() {
     for (int ix = 0; ix < 10; ++ix) {
         graph.connect(ix, (int) random() % 10);
     }
-    for (int edge : graph.adj(7)) {
+    graph.disconnect(3,0);
+    for (int edge : graph.adj(0)) {
         cout << edge << endl;
     }
     cout << "graph edge size:" << graph.edges() << endl;
