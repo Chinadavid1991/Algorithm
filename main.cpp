@@ -8,7 +8,7 @@
 using namespace std;
 
 int main() {
-    const int size = 100000;
+    const int size = 200000;
     testInsertSort(size);
     testSelectSort(size);
 
