@@ -7,7 +7,7 @@
 using namespace std;
 
 void Graph::connect(int v, int w) {
-    if(!_adj[v].insert(w).second){
+    if (!_adj[v].insert(w).second) {
         return;
     }
     _adj[w].insert(v);
@@ -15,7 +15,7 @@ void Graph::connect(int v, int w) {
 }
 
 void Graph::disconnect(int v, int w) {
-    if(_adj[v].erase(w) <= 0){
+    if (_adj[v].erase(w) <= 0) {
         return;
     }
     _adj[w].erase(v);
@@ -26,12 +26,12 @@ const set<int> &Graph::adj(int v) {
     return _adj[v];
 }
 
-void testGraph(){
+void testGraph() {
     Graph graph(10);
     for (int ix = 0; ix < 10; ++ix) {
-        graph.connect(ix,(int)random()%10);
+        graph.connect(ix, (int) random() % 10);
     }
-    for(int edge : graph.adj(7)){
+    for (int edge : graph.adj(7)) {
         cout << edge << endl;
     }
     cout << "graph edge size:" << graph.edges() << endl;

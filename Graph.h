@@ -7,6 +7,7 @@
 
 #include <set>
 #include <iostream>
+
 class Graph {
     const int _V;
     int _E;
@@ -30,6 +31,7 @@ public:
 
 
 };
+
 void testGraph();
 
 #endif //ALGORITHM___GRAPH_H
