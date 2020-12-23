@@ -15,7 +15,6 @@ void Graph::connect(int v, int w) {
 }
 
 void Graph::disconnect(int v, int w) {
-
     if(_adj[v].erase(w) <= 0){
         return;
     }
