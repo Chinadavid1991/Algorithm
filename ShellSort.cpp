@@ -18,7 +18,7 @@ void testShellSort(const int size) {
     ShellSort<int> sort(arr, N);
     long start = now();
     sort.sort();
-    auto end = now();
+    long end = now();
     cout << "ShellSort cost time:" << end - start << endl;
     delete[] arr;
 }

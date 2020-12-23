@@ -18,7 +18,7 @@ void testInsertSort(const int size) {
     InsertSort<int> sort(arr, N);
     long start = now();
     sort.sort();
-    auto end = now();
+    long end = now();
     cout << "InsertSort cost time:" << end - start << endl;
     delete[] arr;
 }
