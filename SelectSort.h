@@ -45,7 +45,7 @@ private:
     v_ref _data;
 
 };
-
+void testSelectSort();
 
 
 #endif //ALGORITHM___SELECTSORT_H
