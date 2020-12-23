@@ -36,4 +36,5 @@ void testGraph() {
         cout << edge << endl;
     }
     cout << "graph edge size:" << graph.edges() << endl;
+    cout << "graph vertices size:" << graph.vertices() << endl;
 }
