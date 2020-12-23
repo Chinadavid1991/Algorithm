@@ -26,3 +26,14 @@ void Graph::disconnect(int v, int w) {
 const set<int> &Graph::adj(int v) {
     return _adj[v];
 }
+
+void testGraph(){
+    Graph graph(10);
+    for (int ix = 0; ix < 10; ++ix) {
+        graph.connect(ix,(int)random()%10);
+    }
+    for(int edge : graph.adj(7)){
+        cout << edge << endl;
+    }
+    cout << "graph edge size:" << graph.edges() << endl;
+}
