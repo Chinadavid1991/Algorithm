@@ -10,6 +10,7 @@
 template<typename T, size_t N>
 class MergeSort {
     using v_ref = T(&)[N];
+    using v_ptr = T(*)[N];
 public:
     explicit MergeSort(v_ref data) : _data(data) {}
 
