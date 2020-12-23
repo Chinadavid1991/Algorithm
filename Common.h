@@ -7,6 +7,6 @@
 
 
 long now();
-
+void testSortAlgorithmTimeCost();
 
 #endif //ALGORITHM___COMMON_H
