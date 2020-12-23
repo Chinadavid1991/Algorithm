@@ -26,7 +26,7 @@ private:
         if (lo >= hi) {//不可分割，组元素个数1
             return;
         }
-        int mid = (hi - lo) / 2;
+        int mid = (hi + lo) / 2;
         sort(assist, lo, mid);
         sort(assist, mid + 1, hi);
         merge(assist, lo, mid, hi);

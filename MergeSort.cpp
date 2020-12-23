@@ -6,7 +6,7 @@
 #include <chrono>
 using namespace std;
 void testMergeSort() {
-    constexpr int N = 20;
+    constexpr int N = 100;
     int arr[N];
     for (int &ix : arr) {
         ix = (int) random() % N;
