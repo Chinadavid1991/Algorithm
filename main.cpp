@@ -1,9 +1,9 @@
 #include <iostream>
-#include "Graph.h"
+#include "QuickSort.h"
 
 using namespace std;
 
 int main() {
-    testGraph();
+    testQuickSort();
     return 0;
 }
