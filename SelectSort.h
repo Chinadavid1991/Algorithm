@@ -7,24 +7,38 @@
 
 #include <iostream>
 
-template<typename T, std::size_t N>
+template<typename T>
 class SelectSort {
-    using v_ref = T (&)[N];
-    using v_ptr = T (*)[N];
+    using v_ptr = T *;
 public:
-    explicit SelectSort(v_ref data) : _data(data) {}
+    explicit SelectSort(v_ptr data, size_t length) : _data(data), N(length) {}
+
     void sort() {
         for (int ix = 0; ix < N; ++ix) {
-            swap(_data[argMin(ix,N)], _data[ix]);
+            swap(_data[argMin(ix, N)], _data[ix]);
         }
     }
 
-    v_ref getData() const {
+    v_ptr getData() const {
         return _data;
     }
 
+    void print() {
+        std::cout << "[";
+        for (size_t ix = 0; ix < N; ++ix) {
+            if (ix == N - 1) {
+                std::cout << _data[ix] << "]";
+            }
+            else {
+                std::cout << _data[ix] << ",";
+            }
+
+        }
+        std::cout << std::endl;
+    }
+
 private:
-    size_t argMin(size_t _items,size_t end) {
+    size_t argMin(size_t _items, size_t end) {
         for (size_t ix = _items; ix < end; ++ix) {
             if (_data[_items] > _data[ix]) {
                 _items = ix;
@@ -41,11 +55,14 @@ private:
         y = temp;
     }
 
+
 private:
-    v_ref _data;
+    v_ptr _data;
+    const size_t N;
 
 };
-void testSelectSort();
+
+void testSelectSort(int size);
 
 
 #endif //ALGORITHM___SELECTSORT_H

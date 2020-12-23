@@ -32,6 +32,6 @@ private:
         }
     }
 };
-void testHeapSort();
+void testHeapSort(int size);
 
 #endif //ALGORITHM___HEAPSORT_H

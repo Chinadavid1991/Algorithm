@@ -5,17 +5,29 @@
 #ifndef ALGORITHM___QUICKSORT_H
 #define ALGORITHM___QUICKSORT_H
 #include <iostream>
-template <typename T,size_t N>
+template <typename T>
 class QuickSort {
-    using v_ref = T(&)[N];
+    using v_ptr = T*;
 public:
-    explicit QuickSort(v_ref data) : _data(data) {}
+    explicit QuickSort(v_ptr data,size_t length) : _data(data),N(length) {}
     void sort(){
         int lo = 0;
         int hi = N - 1;
         sort(lo,hi);
     }
+    void print(){
+        std::cout << "[";
+        for (size_t ix = 0; ix < N; ++ix) {
+            if (ix == N - 1) {
+                std::cout << _data[ix] << "]";
+            }
+            else {
+                std::cout << _data[ix] << ",";
+            }
 
+        }
+        std::cout << std::endl;
+    }
 private:
     void sort(int lo,int hi){
         if(lo >= hi){
@@ -48,8 +60,9 @@ private:
         return right;
     }
 private:
-    v_ref _data;
+    v_ptr _data;
+    const size_t N;
 };
 
-void testQuickSort();
+void testQuickSort(int size);
 #endif //ALGORITHM___QUICKSORT_H

@@ -7,12 +7,11 @@
 
 #include <iostream>
 
-template<typename T, size_t N>
+template<typename T>
 class MergeSort {
-    using v_ref = T(&)[N];
-    using v_ptr = T(*)[N];
+    using v_ptr = T *;
 public:
-    explicit MergeSort(v_ref data) : _data(data) {}
+    explicit MergeSort(v_ptr data, const size_t length) : _data(data), N(length) {}
 
     void sort() {
         T *assist = new T[N];
@@ -21,9 +20,22 @@ public:
         sort(assist, lo, hi);
         delete[] assist;
     }
+    void print(){
+        std::cout << "[";
+        for (size_t ix = 0; ix < N; ++ix) {
+            if (ix == N - 1) {
+                std::cout << _data[ix] << "]";
+            }
+            else {
+                std::cout << _data[ix] << ",";
+            }
+
+        }
+        std::cout << std::endl;
+    }
 
 private:
-    void sort(T* assist, int lo, int hi) {
+    void sort(T *assist, int lo, int hi) {
         if (lo >= hi) {//不可分割，组元素个数1
             return;
         }
@@ -33,7 +45,7 @@ private:
         merge(assist, lo, mid, hi);
     }
 
-    void merge(T* assist, int lo, int mid, int hi) {
+    void merge(T *assist, int lo, int mid, int hi) {
         int ix = lo;
         int p1 = lo;
         int p2 = mid + 1;
@@ -59,8 +71,10 @@ private:
     }
 
 private:
-    v_ref _data;
+    v_ptr _data;
+    const size_t N;
 };
-void testMergeSort();
+
+void testMergeSort(int size);
 
 #endif //ALGORITHM___MERGESORT_H

@@ -3,30 +3,21 @@
 //
 #include "SelectSort.h"
 #include <iostream>
-#include <chrono>
+#include "Common.h"
 
 using namespace std;
 
-void testSelectSort() {
-    constexpr int N = 20;
-    int arr[N];
-    for (int &ix : arr) {
-        ix = (int) random() % N;
+void testSelectSort(const int size) {
+    const int N = size;
+    int *arr = new int[N];
+    for (int ix = 0; ix < N; ++ix) {
+        arr[ix] = (int) random() % N;
     }
-    SelectSort<int, N> sort(arr);
-    auto start = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    sort.sort();
-    auto end = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    cout << "SelectSort cost time:" << end - start << endl;
-    cout << "[";
-    for (size_t ix = 0; ix < N; ++ix) {
-        if (ix == N - 1) {
-            cout << arr[ix] << "]";
-        }
-        else {
-            cout << arr[ix] << ",";
-        }
 
-    }
-    cout << endl;
+    SelectSort<int> sort(arr, N);
+    long start = now();
+    sort.sort();
+    long end = now();
+    cout << "SelectSort cost time:" << end - start << endl;
+    delete[] arr;
 }

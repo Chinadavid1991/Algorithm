@@ -3,18 +3,20 @@
 //
 
 #include "HeapSort.h"
+#include "Common.h"
 
-void testHeapSort() {
-    int arr[101] = {0};
-    for (int ix = 0; ix <= 10; ++ix) {
-        if (ix % 10 == 0) {
-            arr[ix] = 10;
-        }
-        else {
-            arr[ix] = ix;
-        }
+using namespace std;
+
+void testHeapSort(const int size) {
+    const int N = size;
+    int *arr = new int[N];
+    for (int ix = 0; ix < N; ++ix) {
+        arr[ix] = (int) random() % N;
     }
-    HeapSort<int> sort(arr, 11, 1000);
+    HeapSort<int> sort(arr, N, N);
+    long start = now();
     sort.sort();
-    sort.print();
+    long end = now();
+    cout << "HeapSort cost time:" << end - start << endl;
+    delete[] arr;
 }

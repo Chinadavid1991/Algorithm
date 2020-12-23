@@ -3,29 +3,22 @@
 //
 
 #include "InsertSort.h"
-#include <chrono>
+#include "Common.h"
+
 using namespace std;
-void testInsertSort(){
-    constexpr int N = 20;
-    int arr[N];
-    for(int & ix : arr){
-        ix = (int)random()% N;
+
+
+void testInsertSort(const int size) {
+    const int N = size;
+    int *arr = new int[N];
+    for (int ix = 0; ix < N; ++ix) {
+        arr[ix] = (int) random() % N;
     }
-    InsertSort<int,N> sort(arr);
-    auto start = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+
+    InsertSort<int> sort(arr, N);
+    long start = now();
     sort.sort();
-    auto end = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());;
-    cout << "InsertSort cost time:" << end-start << endl;
-    cout << "[";
-    for (size_t ix = 0; ix < N; ++ix) {
-        if (ix == N-1) {
-            cout << arr[ix] << "]";
-        }
-        else {
-            cout << arr[ix] << ",";
-        }
-
-    }
-    cout << endl;
-
+    auto end = now();
+    cout << "InsertSort cost time:" << end - start << endl;
+    delete[] arr;
 }
