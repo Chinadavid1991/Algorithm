@@ -22,7 +22,7 @@ public:
     }
 
 private:
-    void sort(v_ref assist, int lo, int hi) {
+    void sort(T* assist, int lo, int hi) {
         if (lo >= hi) {//不可分割，组元素个数1
             return;
         }
@@ -32,7 +32,7 @@ private:
         merge(assist, lo, mid, hi);
     }
 
-    void merge(v_ref assist, int lo, int mid, int hi) {
+    void merge(T* assist, int lo, int mid, int hi) {
         int ix = lo;
         int p1 = lo;
         int p2 = mid + 1;
