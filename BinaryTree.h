@@ -53,7 +53,7 @@ public:
     void layerOrder(std::vector<K> &vec) const {
         std::deque<v_ptr> que;
         que.push_front(_root);
-        layerOrder(que,vec);
+        layerOrder(que, vec);
     }
 
     friend std::ostream &operator<<(std::ostream &os, const BinaryTree &tree) {
@@ -95,6 +95,9 @@ public:
         return nullptr;
     }
 
+    int maxDepth(){
+        return maxDepth(_root);
+    }
     v_ptr root() const { return _root; }
 
     size_t size() const { return N; }
@@ -241,15 +244,15 @@ private:
     }
 
     //层序遍历
-    void layerOrder( std::deque<v_ptr>& que,std::vector<K> &vec) const {
-        while (!que.empty()){
+    void layerOrder(std::deque<v_ptr> &que, std::vector<K> &vec) const {
+        while (!que.empty()) {
             v_ptr node = que.back();
             que.pop_back();
             vec.push_back(node->key);
-            if(node->left){
+            if (node->left) {
                 que.push_front(node->left);
             }
-            if(node->right){
+            if (node->right) {
                 que.push_front(node->right);
             }
         }
@@ -299,7 +302,14 @@ private:
         }
         return node;
     }
-
+    int maxDepth(v_ptr node){
+        if(!node){
+            return 0;
+        }
+        int MaxL = maxDepth(node->left);
+        int MaxR = maxDepth(node->right);
+        return MaxL > MaxR ? MaxL + 1 : MaxR + 1;
+    }
 private:
     v_ptr _root;
     size_t N;
