@@ -8,7 +8,8 @@
 #include <set>
 #include <vector>
 #include <iostream>
-#include <memory.h>
+#include <deque>
+
 class Graph {
     const int _V;
     int _E;
@@ -33,13 +34,13 @@ public:
         delete[] marked;
         return count;
     }
-    int breadth_dfs(std::vector<int> &vec, int v){
+
+    int breadth_dfs(std::vector<int> &vec, int v) {
         bool *marked = new bool[_V]();
         int count = 0;
-        marked[v] = true;
-        vec.push_back(v);
-        count++;
-        count = breadth_dfs(vec, v, marked, count);
+        std::deque<int> que;
+        que.push_front(v);
+        count = breadth_dfs(vec, que, marked, count);
         delete[] marked;
         return count;
     }
@@ -60,18 +61,19 @@ private:
         ++count;
         return count;
     }
-    int breadth_dfs(std::vector<int> &vec, int v, bool *marked, int count){
-        std::vector<int> search;
-        for(int e : _adj[v]){
-            if(!marked[e]){
-                marked[e] = true;
-                vec.push_back(e);
-                ++count;
-                search.push_back(e);
+
+    int breadth_dfs(std::vector<int> &vec, std::deque<int> &que, bool *marked, int count) {
+        while (!que.empty()){
+            int v = que.back();
+            marked[v] = true;
+            vec.push_back(v);
+            for(int e : _adj[v]){
+                if(!marked[e]){
+                    que.push_front(e);
+                }
             }
-        }
-        for(int e : search){
-            count = breadth_dfs(vec, e, marked, count);
+            que.pop_back();
+            ++count;
         }
         return count;
     }
