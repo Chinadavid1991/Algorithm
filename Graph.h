@@ -65,7 +65,7 @@ private:
         for(int e : _adj[v]){
             if(!marked[e]){
                 marked[e] = true;
-                vec.push_back(v);
+                vec.push_back(e);
                 ++count;
                 search.push_back(e);
             }
