@@ -26,20 +26,20 @@ public:
 
     const std::set<int> &adj(int v);
 
-    int deep_dfs(std::vector<int> &vec, int v) {
+    int depth_dfs(std::vector<int> &vec, int v) {
         bool *marked = new bool[_V]();
         int count = 0;
-        count = deep_dfs(vec, v, marked, count);
+        count = depth_dfs(vec, v, marked, count);
         delete[] marked;
         return count;
     }
-    int depth_dfs(std::vector<int> &vec, int v){
+    int breadth_dfs(std::vector<int> &vec, int v){
         bool *marked = new bool[_V]();
         int count = 0;
         marked[v] = true;
         vec.push_back(v);
         count++;
-        count = depth_dfs(vec, v, marked, count);
+        count = breadth_dfs(vec, v, marked, count);
         delete[] marked;
         return count;
     }
@@ -49,18 +49,18 @@ public:
     }
 
 private:
-    int deep_dfs(std::vector<int> &vec, int v, bool *marked, int count) {
+    int depth_dfs(std::vector<int> &vec, int v, bool *marked, int count) {
         marked[v] = true;
         vec.push_back(v);
         for (int e : _adj[v]) {
             if (!marked[e]) {
-                count = deep_dfs(vec, e, marked, count);
+                count = depth_dfs(vec, e, marked, count);
             }
         }
         ++count;
         return count;
     }
-    int depth_dfs(std::vector<int> &vec, int v, bool *marked, int count){
+    int breadth_dfs(std::vector<int> &vec, int v, bool *marked, int count){
         std::vector<int> search;
         for(int e : _adj[v]){
             if(!marked[e]){
@@ -71,7 +71,7 @@ private:
             }
         }
         for(int e : search){
-            count = depth_dfs(vec, e, marked, count);
+            count = breadth_dfs(vec, e, marked, count);
         }
         return count;
     }

@@ -38,8 +38,8 @@ void testGraph() {
         cout << edge << endl;
     }
     vector<int> v0,v1;
-    cout << graph.deep_dfs(v0,0) << endl;
-    cout << graph.depth_dfs(v1,0) << endl;
+    cout << graph.depth_dfs(v0,0) << endl;
+    cout << graph.breadth_dfs(v1,0) << endl;
 
     cout << "graph edge size:" << graph.edges() << endl;
     cout << "graph vertices size:" << graph.vertices() << endl;
