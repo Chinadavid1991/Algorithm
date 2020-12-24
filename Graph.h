@@ -35,9 +35,6 @@ public:
     }
     int depth_dfs(std::vector<int> &vec, int v){
         bool *marked = new bool[_V]();
-        for(int ix = 0;ix < _V;++ix){
-            std::cout << marked[ix] << std::endl;
-        }
         int count = 0;
         marked[v] = true;
         vec.push_back(v);
