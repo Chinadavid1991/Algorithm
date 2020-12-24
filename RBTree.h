@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <vector>
-
+#include <queue>
 template<typename K, typename V>
 class RBTree {
     struct Node {
@@ -56,7 +56,11 @@ public:
     void midOrder(std::vector<K> &vec) const {
         midOrder(_root, vec);
     }
-
+    void layerOrder(std::vector<K> &vec) const {
+        std::queue<Node*> que;
+        que.push(_root);
+        layerOrder(que,vec);
+    }
 private:
     /*
      * 右旋
@@ -160,7 +164,22 @@ private:
             midOrder(node->right, vec);
         }
     }
-
+    /*
+    * 层序遍历
+    */
+    void layerOrder( std::queue<Node*>& que,std::vector<K> &vec) const {
+        while (!que.empty()){
+            Node* node = que.back();
+            que.pop();
+            vec.push_back(node->key);
+            if(node->left){
+                que.push(node->left);
+            }
+            if(node->right){
+                que.push(node->right);
+            }
+        }
+    }
 private:
     static const bool _black = false;
     static const bool _red = true;

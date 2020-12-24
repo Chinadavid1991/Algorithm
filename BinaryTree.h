@@ -8,21 +8,21 @@
 #include <string>
 #include <vector>
 #include <ostream>
+#include <queue>
 
-
-
-template <class K,class V>
-class BinaryTree{
-    struct Node
-    {
+template<class K, class V>
+class BinaryTree {
+    struct Node {
         K key;
         V value;
-        Node* left;
-        Node* right;
-        Node(const K& k,const V& v,Node* left = nullptr,Node* right = nullptr):
-             key(k),value(v),left(left),right(right) {}
+        Node *left;
+        Node *right;
+
+        Node(const K &k, const V &v, Node *left = nullptr, Node *right = nullptr) :
+                key(k), value(v), left(left), right(right) {}
     };
-    using v_ptr = Node*;
+
+    using v_ptr = Node *;
 public:
     BinaryTree() : _root(nullptr), N(0) {}
 
@@ -50,25 +50,26 @@ public:
         backOrder(_root, vec);
     }
 
+    void layerOrder(std::vector<K> &vec) const {
+        std::queue<v_ptr> que;
+        que.push(_root);
+        layerOrder(que,vec);
+    }
+
     friend std::ostream &operator<<(std::ostream &os, const BinaryTree &tree) {
         std::vector<K> vec;
         tree.midOrder(vec);
-        for (size_t i = 0; i < vec.size(); ++i)
-        {
-            if (i == 0 && i == vec.size() - 1)
-            {
+        for (size_t i = 0; i < vec.size(); ++i) {
+            if (i == 0 && i == vec.size() - 1) {
                 os << "[" << vec[i] << "]";
             }
-            else if (i == 0 && i != vec.size() - 1)
-            {
+            else if (i == 0 && i != vec.size() - 1) {
                 os << "[" << vec[i] << ",";
             }
-            else if (i > 0 && i < vec.size() - 1)
-            {
+            else if (i > 0 && i < vec.size() - 1) {
                 os << vec[i] << ",";
             }
-            else
-            {
+            else {
                 os << vec[i] << "]";
             }
 
@@ -79,18 +80,21 @@ public:
     v_ptr parent(const K &key) const {
         return parent(_root, key);
     }
-    v_ptr min(){
-        if(_root){
+
+    v_ptr min() {
+        if (_root) {
             return min(_root);
         }
         return nullptr;
     }
-    v_ptr max(){
-        if(_root){
+
+    v_ptr max() {
+        if (_root) {
             return max(_root);
         }
         return nullptr;
     }
+
     v_ptr root() const { return _root; }
 
     size_t size() const { return N; }
@@ -106,16 +110,13 @@ private:
             ++N;
             return node;
         }
-        if (key < node->key)
-        {
+        if (key < node->key) {
             node->left = insert(node->left, key, value);
         }
-        else if (key > node->key)
-        {
+        else if (key > node->key) {
             node->right = insert(node->right, key, value);
         }
-        else
-        {
+        else {
             node->value = value;
         }
         return node;
@@ -125,16 +126,13 @@ private:
      *获取节点:查找键对应的值
      */
     v_ptr get(v_ptr node, const K &key) const {
-        if (nullptr == node)
-        {
+        if (nullptr == node) {
             return nullptr;
         }
-        if (key < node->key)
-        {
+        if (key < node->key) {
             node = get(node->left, key);
         }
-        else if (key > node->key)
-        {
+        else if (key > node->key) {
             node = get(node->right, key);
         }
         return node;
@@ -147,16 +145,13 @@ private:
     v_ptr remove(v_ptr node, const K &key) {
         if (node == nullptr) return nullptr;
         //查找要删除的节点
-        if (key < node->key)
-        {
+        if (key < node->key) {
             node->left = remove(node->left, key);
         }
-        else if (key > node->key)
-        {
+        else if (key > node->key) {
             node->right = remove(node->right, key);
         }
-        else
-        {
+        else {
 
             v_ptr rp_node = nullptr;//替换的节点
             v_ptr lp_node = nullptr;//替换节点的父节点
@@ -172,22 +167,18 @@ private:
                 delete node;
                 node = rp_node;
             }
-            else
-            {
+            else {
                 --N;
                 rp_node = node->right;
                 //查找最左侧的节点
-                while (rp_node->left != nullptr)
-                {
-                    if (rp_node->left->left == nullptr)
-                    {
+                while (rp_node->left != nullptr) {
+                    if (rp_node->left->left == nullptr) {
                         lp_node = rp_node;
                     }
                     rp_node = rp_node->left;
                 }
                 //断开最左侧节点与父节点的连接
-                if (lp_node)
-                {
+                if (lp_node) {
                     lp_node->left = rp_node->right;
                 }
                 //替换删除节点的左右连接
@@ -208,13 +199,11 @@ private:
         //放入节点的键
         vec.push_back(node->key);
         //递归左侧节点
-        if (node->left != nullptr)
-        {
+        if (node->left != nullptr) {
             preOrder(node->left, vec);
         }
 
-        if (node->right != nullptr)
-        {
+        if (node->right != nullptr) {
             preOrder(node->right, vec);
         }
     }
@@ -225,15 +214,13 @@ private:
     void midOrder(v_ptr node, std::vector<K> &vec) const {
         if (nullptr == node) return;
         //递归左侧节点
-        if (node->left != nullptr)
-        {
+        if (node->left != nullptr) {
             midOrder(node->left, vec);
         }
         //放入节点的键
         vec.push_back(node->key);
 
-        if (node->right != nullptr)
-        {
+        if (node->right != nullptr) {
             midOrder(node->right, vec);
         }
     }
@@ -242,44 +229,52 @@ private:
     void backOrder(v_ptr node, std::vector<K> &vec) const {
         if (nullptr == node) return;
         //递归左侧节点
-        if (node->left != nullptr)
-        {
+        if (node->left != nullptr) {
             backOrder(node->left, vec);
         }
 
-        if (node->right != nullptr)
-        {
+        if (node->right != nullptr) {
             backOrder(node->right, vec);
         }
         //放入节点的键
         vec.push_back(node->key);
     }
 
+    //层序遍历
+    void layerOrder( std::queue<v_ptr>& que,std::vector<K> &vec) const {
+        while (!que.empty()){
+            v_ptr node = que.back();
+            que.pop();
+            vec.push_back(node->key);
+            if(node->left){
+                que.push(node->left);
+            }
+            if(node->right){
+                que.push(node->right);
+            }
+        }
+    }
+
     v_ptr parent(v_ptr node, const K &key) const {
-        if (nullptr == node || node->key == key)
-        {
+        if (nullptr == node || node->key == key) {
             return nullptr;
         }
 
         if (node->right && node->key < key)//子节点在当前节点的右侧
         {
-            if (node->right->key == key)
-            {
+            if (node->right->key == key) {
                 return node;
             }
-            else
-            {
+            else {
                 node = parent(node->right, key);
             }
         }
         else if (node->left && node->key > key)//子节点在当前节点的左侧
         {
-            if (node->left->key == key)
-            {
+            if (node->left->key == key) {
                 return node;
             }
-            else
-            {
+            else {
                 node = parent(node->left, key);
             }
 
@@ -290,14 +285,16 @@ private:
         }
         return node;
     }
-    v_ptr min(v_ptr node){
-        if(node->left){
+
+    v_ptr min(v_ptr node) {
+        if (node->left) {
             node = min(node->left);
         }
         return node;
     }
-    v_ptr max(v_ptr node){
-        if(node->right){
+
+    v_ptr max(v_ptr node) {
+        if (node->right) {
             node = max(node->right);
         }
         return node;
@@ -309,4 +306,5 @@ private:
 };
 
 void testBinaryTree();
+
 #endif //ALGORITHM___BINARYTREE_H
