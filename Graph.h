@@ -43,9 +43,9 @@ private:
     int dfs(std::vector<int>& vec,int v,bool* marked,int count){
         marked[v] = true;
         vec.push_back(v);
-        for(int edge : _adj[v]){
-            if(!marked[edge]){
-                count = dfs(vec,edge,marked,count);
+        for(int e : _adj[v]){
+            if(!marked[e]){
+                count = dfs(vec,e,marked,count);
             }
         }
         ++count;
