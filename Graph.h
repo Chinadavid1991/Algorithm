@@ -26,10 +26,10 @@ public:
 
     const std::set<int> &adj(int v);
 
-    int dfs(std::vector<int>& vec,int v){
-        bool* marked = new bool[_V];
+    int dfs(std::vector<int> &vec, int v) {
+        bool *marked = new bool[_V];
         int count = 0;
-        count = dfs(vec,v,marked,count);
+        count = dfs(vec, v, marked, count);
         delete[] marked;
         return count;
     }
@@ -40,12 +40,12 @@ public:
     }
 
 private:
-    int dfs(std::vector<int>& vec,int v,bool* marked,int count){
+    int dfs(std::vector<int> &vec, int v, bool *marked, int count) {
         marked[v] = true;
         vec.push_back(v);
-        for(int e : _adj[v]){
-            if(!marked[e]){
-                count = dfs(vec,e,marked,count);
+        for (int e : _adj[v]) {
+            if (!marked[e]) {
+                count = dfs(vec, e, marked, count);
             }
         }
         ++count;
