@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <deque>
+#include <stack>
 #include <initializer_list>
 
 class Graph {
@@ -47,6 +48,11 @@ public:
         return count;
     }
 
+    void path_dfs(int start,int end){
+        bool *marked = new bool[_V]();
+        std::stack<int> path;
+        path_dfs(start,end,path,marked);
+    }
     virtual ~Graph() {
         delete[] _adj;
     }
@@ -78,6 +84,36 @@ private:
             ++count;
         }
         return count;
+    }
+
+    void path_dfs(int start,int end,std::stack<int>& path,bool* marked){
+        if(start == end){
+            //打印路径信息
+            std::stack<int> s(path);
+            std::cout << "show path:" << end << "<-";
+            while (!s.empty()){
+                if(s.size() > 1){
+                    std::cout << s.top() << "<-";
+                }
+                else{
+                    std::cout << s.top();
+                }
+                s.pop();
+            }
+            std::cout << std::endl;
+        }
+        else{
+            path.push(start);
+            marked[start] = true;
+            for(int e : _adj[start]){
+                if(marked[e]){
+                    continue;
+                }
+                path_dfs(e,end,path,marked);
+            }
+            path.pop();
+            marked[start] = false;
+        }
     }
 };
 
