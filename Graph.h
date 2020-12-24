@@ -40,6 +40,7 @@ public:
         int count = 0;
         std::deque<int> que;
         que.push_front(v);
+        marked[v] = true;
         count = breadth_dfs(vec, que, marked, count);
         delete[] marked;
         return count;
@@ -65,11 +66,11 @@ private:
     int breadth_dfs(std::vector<int> &vec, std::deque<int> &que, bool *marked, int count) {
         while (!que.empty()){
             int v = que.back();
-            marked[v] = true;
             vec.push_back(v);
             for(int e : _adj[v]){
                 if(!marked[e]){
                     que.push_front(e);
+                    marked[e] = true;
                 }
             }
             que.pop_back();

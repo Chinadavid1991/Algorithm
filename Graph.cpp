@@ -27,7 +27,7 @@ const set<int> &Graph::adj(int v) {
 }
 
 void testGraph() {
-    const int N = 30;
+    const int N = 100;
     Graph graph(N);
     for (int ix = 0; ix < N; ++ix) {
         graph.connect(ix, (int) random() % N);
