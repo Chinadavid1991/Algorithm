@@ -6,6 +6,7 @@
 #define ALGORITHM___GRAPH_H
 
 #include <set>
+#include <vector>
 #include <iostream>
 
 class Graph {
@@ -25,10 +26,31 @@ public:
 
     const std::set<int> &adj(int v);
 
+    int dfs(std::vector<int>& vec,int v){
+        bool* marked = new bool[_V];
+        int count = 0;
+        count = dfs(vec,v,marked,count);
+        delete[] marked;
+        return count;
+    }
+
+
     virtual ~Graph() {
         delete[] _adj;
     }
 
+private:
+    int dfs(std::vector<int>& vec,int v,bool* marked,int count){
+        marked[v] = true;
+        vec.push_back(v);
+        for(int edge : _adj[v]){
+            if(!marked[edge]){
+                count = dfs(vec,edge,marked,count);
+            }
+        }
+        ++count;
+        return count;
+    }
 
 };
 
