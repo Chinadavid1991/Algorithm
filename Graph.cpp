@@ -35,16 +35,18 @@ const set<int> &Graph::adj(int v) {
 
 
 void testGraph() {
-    const int N = 6;
+    const int N = 8;
     Graph graph(N);
 
     graph.connect(0,{0,1,2,5});
     graph.connect(2,{0,1,2,3,4});
     graph.connect(3,{2,4,5});
-    graph.connect(4,{2,3});
-    graph.connect(5,{0,3});
+    graph.connect(4,{2,3,6});
+    graph.connect(5,{0,3,7});
+    graph.connect(6,7);
     graph.disconnect(2,1);
     graph.disconnect(3,4);
+    graph.disconnect(7,6);
 
 
     for (int edge : graph.adj(0)) {
@@ -54,5 +56,5 @@ void testGraph() {
     cout << "graph edge size:" << graph.edges() << endl;
     cout << "graph vertices size:" << graph.vertices() << endl;
 
-    graph.path_dfs(0,4);
+    graph.path_dfs(0,2);
 }

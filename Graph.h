@@ -90,7 +90,12 @@ private:
         if(start == end){
             //打印路径信息
             std::stack<int> s(path);
-            std::cout << "show path:" << end << "<-";
+            if(!s.empty()){
+                std::cout << "show path:" << end << "<-";
+            }
+            else{
+                std::cout << "show path:" << end;
+            }
             while (!s.empty()){
                 if(s.size() > 1){
                     std::cout << s.top() << "<-";
