@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Graph.h"
+#include "RBTree.h"
 using namespace std;
 
 int main() {
-    testGraph();
+    testRBTree();
     return 0;
 }

@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 #include <ostream>
-#include <queue>
+#include <deque>
 
 template<class K, class V>
 class BinaryTree {
@@ -51,8 +51,8 @@ public:
     }
 
     void layerOrder(std::vector<K> &vec) const {
-        std::queue<v_ptr> que;
-        que.push(_root);
+        std::deque<v_ptr> que;
+        que.push_front(_root);
         layerOrder(que,vec);
     }
 
@@ -241,16 +241,16 @@ private:
     }
 
     //层序遍历
-    void layerOrder( std::queue<v_ptr>& que,std::vector<K> &vec) const {
+    void layerOrder( std::deque<v_ptr>& que,std::vector<K> &vec) const {
         while (!que.empty()){
             v_ptr node = que.back();
-            que.pop();
+            que.pop_back();
             vec.push_back(node->key);
             if(node->left){
-                que.push(node->left);
+                que.push_front(node->left);
             }
             if(node->right){
-                que.push(node->right);
+                que.push_front(node->right);
             }
         }
     }

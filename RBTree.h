@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <vector>
-#include <queue>
+#include <deque>
 template<typename K, typename V>
 class RBTree {
     struct Node {
@@ -31,7 +31,7 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const RBTree &tree) {
         std::vector<K> vec;
-        tree.midOrder(vec);
+        tree.layerOrder(vec);
         for (size_t i = 0; i < vec.size(); ++i) {
             if (i == 0 && i == vec.size() - 1) {
                 os << "[" << vec[i] << "]";
@@ -57,8 +57,8 @@ public:
         midOrder(_root, vec);
     }
     void layerOrder(std::vector<K> &vec) const {
-        std::queue<Node*> que;
-        que.push(_root);
+        std::deque<Node*> que;
+        que.push_front(_root);
         layerOrder(que,vec);
     }
 private:
@@ -167,16 +167,16 @@ private:
     /*
     * 层序遍历
     */
-    void layerOrder( std::queue<Node*>& que,std::vector<K> &vec) const {
+    void layerOrder( std::deque<Node*>& que,std::vector<K> &vec) const {
         while (!que.empty()){
             Node* node = que.back();
-            que.pop();
+            que.pop_back();
             vec.push_back(node->key);
             if(node->left){
-                que.push(node->left);
+                que.push_front(node->left);
             }
             if(node->right){
-                que.push(node->right);
+                que.push_front(node->right);
             }
         }
     }
