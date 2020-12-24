@@ -27,7 +27,7 @@ const set<int> &Graph::adj(int v) {
 }
 
 void testGraph() {
-    const int N = 10;
+    const int N = 100;
     Graph graph(N);
     for (int ix = 0; ix < N; ++ix) {
         graph.connect(ix, (int) random() % N);
@@ -37,8 +37,9 @@ void testGraph() {
     for (int edge : graph.adj(0)) {
         cout << edge << endl;
     }
-    vector<int> vec;
-    cout << graph.dfs(vec,0) << endl;
+    vector<int> vec_0,vec_1;
+    cout << graph.deep_dfs(vec_0,0) << endl;
+    cout << graph.depth_dfs(vec_1,0) << endl;
 
     cout << "graph edge size:" << graph.edges() << endl;
     cout << "graph vertices size:" << graph.vertices() << endl;

@@ -8,7 +8,7 @@
 #include <set>
 #include <vector>
 #include <iostream>
-
+#include <memory.h>
 class Graph {
     const int _V;
     int _E;
@@ -26,32 +26,57 @@ public:
 
     const std::set<int> &adj(int v);
 
-    int dfs(std::vector<int> &vec, int v) {
+    int deep_dfs(std::vector<int> &vec, int v) {
         bool *marked = new bool[_V];
+        memset((char*)marked,0, sizeof(bool)*_V);
         int count = 0;
-        count = dfs(vec, v, marked, count);
+        count = deep_dfs(vec, v, marked, count);
         delete[] marked;
         return count;
     }
-
+    int depth_dfs(std::vector<int> &vec, int v){
+        bool *marked = new bool[_V];
+        memset((char*)marked,0, sizeof(bool)*_V);
+        int count = 0;
+        marked[v] = true;
+        vec.push_back(v);
+        count++;
+        count = depth_dfs(vec, v, marked, count);
+        delete[] marked;
+        return count;
+    }
 
     virtual ~Graph() {
         delete[] _adj;
     }
 
 private:
-    int dfs(std::vector<int> &vec, int v, bool *marked, int count) {
+    int deep_dfs(std::vector<int> &vec, int v, bool *marked, int count) {
         marked[v] = true;
         vec.push_back(v);
         for (int e : _adj[v]) {
             if (!marked[e]) {
-                count = dfs(vec, e, marked, count);
+                count = deep_dfs(vec, e, marked, count);
             }
         }
         ++count;
         return count;
     }
-
+    int depth_dfs(std::vector<int> &vec, int v, bool *marked, int count){
+        std::vector<int> search;
+        for(int e : _adj[v]){
+            if(!marked[e]){
+                marked[e] = true;
+                vec.push_back(v);
+                ++count;
+                search.push_back(e);
+            }
+        }
+        for(int e : search){
+            count = depth_dfs(vec, e, marked, count);
+        }
+        return count;
+    }
 };
 
 void testGraph();
