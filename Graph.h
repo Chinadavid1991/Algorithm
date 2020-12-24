@@ -28,7 +28,7 @@ public:
 
     int deep_dfs(std::vector<int> &vec, int v) {
         bool *marked = new bool[_V];
-        memset((char*)marked,0, sizeof(bool)*_V);
+        memset(marked,0, sizeof(bool)*_V);
         int count = 0;
         count = deep_dfs(vec, v, marked, count);
         delete[] marked;
@@ -36,7 +36,7 @@ public:
     }
     int depth_dfs(std::vector<int> &vec, int v){
         bool *marked = new bool[_V];
-        memset((char*)marked,0, sizeof(bool)*_V);
+        memset(marked,0, sizeof(bool)*_V);
         int count = 0;
         marked[v] = true;
         vec.push_back(v);
