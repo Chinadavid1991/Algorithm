@@ -6,40 +6,48 @@
 
 using namespace std;
 
-void Graph::connect(int v, int w) {
-    if (v == w || !_adj[v].insert(w).second) {
+void Graph::connect(int v, int e) {
+    if (v == e || !_adj[v].insert(e).second) {
         return;
     }
-    _adj[w].insert(v);
+    _adj[e].insert(v);
     _E++;
 }
 
-void Graph::disconnect(int v, int w) {
-    if (v == w || _adj[v].erase(w) <= 0) {
+
+
+void Graph::disconnect(int v, int e) {
+    if (v == e || _adj[v].erase(e) <= 0) {
         return;
     }
-    _adj[w].erase(v);
+    _adj[e].erase(v);
     _E--;
 }
-
+void Graph::connect(int v, std::initializer_list<int> edges) {
+    for(int e : edges){
+        connect(v,e);
+    }
+}
 const set<int> &Graph::adj(int v) {
     return _adj[v];
 }
 
+
+
 void testGraph() {
-    const int N = 20;
+    const int N = 6;
     Graph graph(N);
-    for (int ix = 0; ix < N; ++ix) {
-        graph.connect(ix, (int) random() % N);
-    }
+
+    graph.connect(0,{0,1,2,5});
+    graph.connect(2,{0,1,2,3,4});
+    graph.connect(3,{2,4,5});
+    graph.connect(4,{2,3});
+    graph.connect(5,{0,3});
 
 
     for (int edge : graph.adj(0)) {
-        cout << edge << endl;
+        cout << "vertices 0 connect:" << edge << endl;
     }
-    vector<int> v0, v1;
-    cout << graph.depth_dfs(v0, 0) << endl;
-    cout << graph.breadth_dfs(v1, 0) << endl;
 
     cout << "graph edge size:" << graph.edges() << endl;
     cout << "graph vertices size:" << graph.vertices() << endl;

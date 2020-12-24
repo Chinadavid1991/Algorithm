@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <deque>
+#include <initializer_list>
 
 class Graph {
     const int _V;
@@ -22,7 +23,7 @@ public:
     int edges() const { return _E; }
 
     void connect(int v, int w);
-
+    void connect(int v,std::initializer_list<int> edges);
     void disconnect(int v, int w);
 
     const std::set<int> &adj(int v);
