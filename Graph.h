@@ -27,16 +27,17 @@ public:
     const std::set<int> &adj(int v);
 
     int deep_dfs(std::vector<int> &vec, int v) {
-        bool *marked = new bool[_V];
-        memset(marked,0, sizeof(bool)*_V);
+        bool *marked = new bool[_V]();
         int count = 0;
         count = deep_dfs(vec, v, marked, count);
         delete[] marked;
         return count;
     }
     int depth_dfs(std::vector<int> &vec, int v){
-        bool *marked = new bool[_V];
-        memset(marked,0, sizeof(bool)*_V);
+        bool *marked = new bool[_V]();
+        for(int ix = 0;ix < _V;++ix){
+            std::cout << marked[ix] << std::endl;
+        }
         int count = 0;
         marked[v] = true;
         vec.push_back(v);
