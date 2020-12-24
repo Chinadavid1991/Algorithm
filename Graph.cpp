@@ -46,7 +46,6 @@ void testGraph() {
     graph.connect(6,7);
     graph.disconnect(2,1);
     graph.disconnect(3,4);
-    graph.disconnect(7,6);
 
 
     for (int edge : graph.adj(0)) {
