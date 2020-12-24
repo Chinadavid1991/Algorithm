@@ -38,7 +38,7 @@ void testGraph() {
     const int N = 8;
     Graph graph(N);
 
-    graph.connect(0,{0,1,2,5});
+    graph.connect(0,{0,1,2,5,7});
     graph.connect(2,{0,1,2,3,4});
     graph.connect(3,{2,4,5});
     graph.connect(4,{2,3,6});
@@ -55,5 +55,5 @@ void testGraph() {
     cout << "graph edge size:" << graph.edges() << endl;
     cout << "graph vertices size:" << graph.vertices() << endl;
 
-    graph.path_dfs(0,2);
+    graph.path_dfs(0,4);
 }
